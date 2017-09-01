@@ -1,0 +1,10 @@
+<div class="logbox">
+<h1>Éditer le commentaire :</h1>
+<%= simple_form_for [@invoice, @review] do |f| %>
+  <%= f.input :auteur, label: "Auteur: " %>
+  <%= f.input :content, label: "Commentaire: "%>
+
+  <%= f.submit "Éditer", class: "btn btn-primary" %>
+<% end %>
+</div>
+

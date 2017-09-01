@@ -1,0 +1,40 @@
+<div class="logbox">
+            <%= simple_form_for(@invoice) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :name, required: false, autofocus: true %>
+              <%= f.input :office %>
+              <%= f.input :object %>
+              <%= f.input :supplier %>
+              <%= f.input :serial %>
+              <%= f.input :specific_id %>
+              <%= f.input :emplacement %>
+              <%= f.input :value %>
+              <%= f.input :begin %>
+              <%= f.input :end %>
+              <%= f.input :photo, as: :attachinary %>
+
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, "Send" %>
+            </div>
+        <% end %>
+</div>
+
+
+<!--  create_table "invoices", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.string   "office",      null: false
+    t.string   "object",      null: false
+    t.string   "supplier",    null: false
+    t.string   "name",        null: false
+    t.string   "serial"
+    t.string   "specific_id"
+    t.string   "emplacement", null: false
+    t.float    "value"
+    t.date     "begin"
+    t.date     "end"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  end -->

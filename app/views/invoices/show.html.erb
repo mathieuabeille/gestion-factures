@@ -1,0 +1,99 @@
+<div class="box-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="box-container">
+                  <%= link_to edit_invoice_path(@invoice) do %>
+          <i class="fa fa-pencil icons card-link" aria-hidden="true"></i>
+        <% end %>
+          <h3>Fiche Immobilisation : </h3>
+
+          <p><b>Nom du produit: </b><%= @invoice.name %></p>
+          <p><b>Objet: </b><%= @invoice.object %></p>
+          <p><b>Fournisseur: </b><%= @invoice.supplier %></p>
+          <p><b>Bureau: </b><%= @invoice.office %></p>
+          <p><b>Numéro de série: </b><%= @invoice.serial %></p>
+          <p><b>Numéro d'indentité: </b><%= @invoice.specific_id %></p>
+          <p><b>Emplacement: </b><%= @invoice.emplacement %></p>
+
+        </div>
+
+         <div class="box-container">
+          <h3>Ajouter un commentaire : </h3>
+          <%= simple_form_for [@invoice, @review] do |f| %>
+          <%= f.input :auteur, label: 'Auteur:' %>
+          <%= f.input :content, label: 'Message:' %>
+          <%= f.submit "Ajouter", class: "btn btn-primary"%>
+          <% end %>
+        </div>
+
+
+          <% @invoice.reviews.reverse_each do |review| %>
+            <div class="box-container">
+           <b><%= review.auteur %></b>
+              le <i><%= review.created_at  %>:</i>
+            <p> <%= review.content  %> </p>
+             <%= link_to review_path(review), method: :delete, data: { confirm: "Confirmation" } do %>
+            <i class="fa fa-trash icons card-link" aria-hidden="true"></i>
+            <% end %>
+
+             <%= link_to edit_invoice_review_path(review) do %>
+            <i class="fa fa-pencil icons card-link" aria-hidden="true"></i>
+            <% end %>
+            </div>
+          <% end %>
+          </div>
+      <div class="col-sm-4">
+
+          <div class="box-container">
+            <h3>Amortissement :</h3>
+
+            <p><b>Valeur achat: </b>
+              <%= @invoice.value %>$
+              </p>
+
+            <p><b>Valeur amortie: </b>
+            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
+              <%= ((Time.now.year-@invoice.begin.year)*(@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100) %> $
+            <% else %>
+              impossible
+            <% end %></p>
+
+             <p><b>Valeur residuelle: </b>
+            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
+              <%= @invoice.value-((Time.now.year-@invoice.begin.year)*(@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100) %> $
+            <% else %>
+              impossible
+            <% end %></p>
+
+            <p><b>Dépreciation annuelle:</b> </b>
+            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
+              <%= (@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100 %> $
+            <% else %>
+              impossible
+            <% end %></p>
+            <p><b>Durée amortisation:</b>
+            <%= @invoice.end.year-@invoice.begin.year%>ans</p>
+            <p><b>Temps écoulé:</b>
+            <%= Time.now.year-@invoice.begin.year%> ans</p>
+            <p><b>Temps restant:</b>
+            <%= @invoice.end.year-Time.now.year%> ans</p>
+            <p><b>Début amortissement: </b>
+            <%= @invoice.begin %></p>
+            <p><b>Fin amortissement: </b>
+            <%= @invoice.end %></p>
+          </div>
+
+          <div class="box-container">
+          <h3>Source :</h3>
+          <center>
+          <% if @invoice.photo? %>
+          <%= cl_image_tag @invoice.photo.path, width: 200, height: 300, crop: :fill %>
+          <% end %>
+          </center>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

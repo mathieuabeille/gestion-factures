@@ -1,0 +1,22 @@
+<div class="tablebanner">
+<%= link_to 'Nouvelle Facture', new_invoice_path, class:  'btn-medium' %>
+</div>
+
+<div class="table">
+  <% @invoices.each do |invoice| %>
+    <%= link_to invoice_path(invoice), class: 'card-link' do %>
+      <div class="table-row">
+        <b><%= invoice.object %></b>
+        <%= invoice.supplier %>
+        <i><%= invoice.office %></i>
+        <%= link_to invoice_path(invoice), method: :delete, data: { confirm: "Confirmation" } do %>
+        <i class="fa fa-trash icons card-link" aria-hidden="true"></i>
+        <% end %>
+        <%= link_to edit_invoice_path(invoice) do %>
+          <i class="fa fa-pencil icons card-link" aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <% end %>
+   <% end %>
+</div>
+
