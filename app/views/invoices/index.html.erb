@@ -42,7 +42,7 @@
   <% @invoices.each do |invoice| %>
     <%= link_to invoice_path(invoice), class: 'card-link' do %>
       <div class="table-row">
-        <b><%= invoice.object %></b>
+        <b><%= invoice.object %> - <%= invoice.name %> - %= invoice.emplacement %></b>
         <%= invoice.supplier %>
         <i><%= invoice.office %></i>
         <%= link_to invoice_path(invoice), method: :delete, data: { confirm: "Confirmation" } do %>
