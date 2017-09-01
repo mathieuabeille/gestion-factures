@@ -58,7 +58,6 @@
             <% else %>
               impossible
             <% end %></p>
-
              <p><b>Valeur residuelle: </b>
             <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
               <%= @invoice.value-((Time.now.year-@invoice.begin.year)*(@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100) %> $

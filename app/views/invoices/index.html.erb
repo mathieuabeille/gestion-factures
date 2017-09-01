@@ -1,5 +1,41 @@
-<div class="tablebanner">
-<%= link_to 'Nouvelle Facture', new_invoice_path, class:  'btn-medium' %>
+ <%= render "searchbar" %>
+
+
+
+
+      <div class="office">
+    <div class="btn-group">
+      <a type="button" class="btn btn-medium">Fournisseur</a>
+      <a type="button" class="btn btn-medium dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <input type="radio" id="gender-women" name="gender[]" value="women"  >
+          <label for="gender-women" action="#" method="get">
+          <i aria-hidden= "true" name="black"> Scriba</i>
+          </label>
+        </li>
+        <li>
+          <input type="radio" id="gender-men" name="gender[]" value="men" >
+          <label for="gender-men" action="#" method="get">
+          <i aria-hidden= "true" name="black"> France défi</i>
+          </label>
+        </li>
+         <li>
+          <input type="radio" id="gender-men" name="gender[]" value="men" >
+          <label for="gender-men" action="#" method="get">
+          <i aria-hidden= "true" name="black"> SFR</i>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+</p>
 </div>
 
 <div class="table">

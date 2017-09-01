@@ -2,6 +2,12 @@
   <div class="banner-content">
     <h1>ACA Consult</h1>
     <p>Gestionnaire de factures</p>
-    <%= link_to 'mon espace', new_user_session_path, class: 'btn btn-primary btn-lg'  %>
+
+    <% if user_signed_in? %>
+      <%= link_to 'Mes factures', invoices_path, class: 'btn btn-medium btn-lg'  %>
+    <% else %>
+      <%= link_to 'Se connecter', new_user_session_path, class: 'btn btn-medium btn-lg'  %>
+      <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-medium btn-lg'  %>
+    <% end %>
   </div>
 </div>

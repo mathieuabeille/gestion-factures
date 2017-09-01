@@ -5,6 +5,8 @@
   height: 50px;
   background-color: $light-gray;
   border-bottom: solid 1px #999999;
+  display: flex;
+  justify-content: space-between;
 }
 
 .table{
@@ -50,6 +52,8 @@
   color: #999999;
 }
 
+
+
 .icons {
   float: right;
   padding: 5px;
@@ -65,3 +69,23 @@
   text-decoration: none;
   transition: all ease 500ms;
 }
+
+.form-size{
+  height: 10px!important;
+}
+
+
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked + label {
+      background: $blue-aca;
+      color: white;
+      margin:0;
+      width:100%;
+      border-radius:0px !important;
+    }
+
+
