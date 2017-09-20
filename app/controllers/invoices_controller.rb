@@ -48,9 +48,14 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:name, :office, :object, :supplier, :serial, :specific_id, :emplacement, :value, :begin, :end, :photo)
+    params.require(:invoice).permit(:entite, :specifique_id, :fournisseur, :nom, :marque, :description, :duree_garantie, :emplacement, :date_achat, :fin_amortissement, :numero_comptabilite, :processeur, :RAM, :memoire, :systeme_exploitation, :numero_OS, :photo)
   end
 
 
 end
+
+
+
+
+
 

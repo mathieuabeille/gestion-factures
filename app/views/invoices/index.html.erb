@@ -2,49 +2,13 @@
 
 
 
-
-      <div class="office">
-    <div class="btn-group">
-      <a type="button" class="btn btn-medium">Fournisseur</a>
-      <a type="button" class="btn btn-medium dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <input type="radio" id="gender-women" name="gender[]" value="women"  >
-          <label for="gender-women" action="#" method="get">
-          <i aria-hidden= "true" name="black"> Scriba</i>
-          </label>
-        </li>
-        <li>
-          <input type="radio" id="gender-men" name="gender[]" value="men" >
-          <label for="gender-men" action="#" method="get">
-          <i aria-hidden= "true" name="black"> France défi</i>
-          </label>
-        </li>
-         <li>
-          <input type="radio" id="gender-men" name="gender[]" value="men" >
-          <label for="gender-men" action="#" method="get">
-          <i aria-hidden= "true" name="black"> SFR</i>
-          </label>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-
-
-</p>
-</div>
-
 <div class="table">
   <% @invoices.each do |invoice| %>
     <%= link_to invoice_path(invoice), class: 'card-link' do %>
       <div class="table-row">
-        <b><%= invoice.object %> - <%= invoice.name %> - <%= invoice.emplacement %></b>
-        <%= invoice.supplier %>
-        <i><%= invoice.office %></i>
+        <b><%= invoice.nom %> - <%= invoice.entite %></b>
+        <%= invoice.fournisseur %>
+        <i><%= invoice.emplacement %></i>
         <%= link_to invoice_path(invoice), method: :delete, data: { confirm: "Confirmation" } do %>
         <i class="fa fa-trash icons card-link" aria-hidden="true"></i>
         <% end %>
@@ -55,4 +19,9 @@
       <% end %>
    <% end %>
 </div>
+
+
+
+
+
 

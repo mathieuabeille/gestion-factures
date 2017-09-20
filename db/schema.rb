@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831102646) do
+ActiveRecord::Schema.define(version: 20170911123659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,20 +30,36 @@ ActiveRecord::Schema.define(version: 20170831102646) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "contrats", force: :cascade do |t|
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "adresse"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invoices", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.string   "office",      null: false
-    t.string   "object",      null: false
-    t.string   "supplier",    null: false
-    t.string   "name",        null: false
+    t.integer  "user_id"
+    t.string   "entite"
+    t.string   "specifique_id"
+    t.string   "fournisseur"
+    t.string   "marque"
+    t.string   "nom"
+    t.string   "description"
     t.string   "serial"
-    t.string   "specific_id"
-    t.string   "emplacement", null: false
     t.float    "value"
-    t.date     "begin"
-    t.date     "end"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "duree_garantie"
+    t.string   "emplacement"
+    t.date     "date_achat"
+    t.date     "fin_amortissement"
+    t.string   "numero_comptabilite"
+    t.string   "processeur"
+    t.string   "RAM"
+    t.string   "memoire"
+    t.string   "systeme_exploitation"
+    t.string   "numero_OS"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["user_id"], name: "index_invoices_on_user_id", using: :btree
   end
 

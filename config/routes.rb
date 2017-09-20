@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contrats
   mount Attachinary::Engine => "/attachinary"
   devise_for :users
   resources :invoices do

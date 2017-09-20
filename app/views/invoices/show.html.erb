@@ -7,18 +7,125 @@
           <i class="fa fa-pencil icons card-link" aria-hidden="true"></i>
         <% end %>
           <h3>Fiche Immobilisation : </h3>
+          <% if @invoice.specifique_id.present?  %>
+            <p><b>Numéro d'identification: </b></p> <%= @invoice.specifique_id %>
+          <% end %>
+          <% if @invoice.entite.present?  %>
+            <p><b>Entité: </b></p> <%= @invoice.entite %>
+          <% end %>
+          <% if @invoice.fournisseur.present?  %>
+            <p><b>Fournisseur: </b></p> <%= @invoice.fournisseur %>
+          <% end %>
+          <% if @invoice.nom.present?  %>
+            <p><b>Nom: </b></p> <%= @invoice.nom %>
+          <% end %>
+          <% if @invoice.description.present?  %>
+            <p><b>Description: </b></p> <%= @invoice.description %>
+          <% end %>
+          <% if @invoice.serial.present?  %>
+            <p><b>Numéro de série: </b></p> <%= @invoice.serial %>
+          <% end %>
+          <% if @invoice.emplacement.present?  %>
+            <p><b>Emplacement: </b></p> <%= @invoice.emplacement %>
+          <% end %>
+          <% if @invoice.numero_comptabilite.present?  %>
+            <p><b>Numéro de comptabilité: </b></p> <%= @invoice.numero_comptabilite %>
+          <% end %>
+          <% if @invoice.processeur.present?  %>
+            <p><b>Processeur: </b></p> <%= @invoice.processeur %>
+          <% end %>
+          <% if @invoice.RAM.present?  %>
+            <p><b>Mémoire Vive: </b></p> <%= @invoice.RAM %>
+          <% end %>
+          <% if @invoice.memoire.present?  %>
+            <p><b>Taille: </b></p> <%= @invoice.memoire %>
+          <% end %>
+          <% if @invoice.systeme_exploitation.present?  %>
+            <p><b>Systême d'exploitation: </b></p> <%= @invoice.systeme_exploitation %>
+          <% end %>
+          <% if @invoice.numero_OS.present?  %>
+            <p><b>Numéro de série OS: </b></p> <%= @invoice.numero_OS %>
+          <% end %>
 
-          <p><b>Nom du produit: </b><%= @invoice.name %></p>
-          <p><b>Objet: </b><%= @invoice.object %></p>
-          <p><b>Fournisseur: </b><%= @invoice.supplier %></p>
-          <p><b>Bureau: </b><%= @invoice.office %></p>
-          <p><b>Numéro de série: </b><%= @invoice.serial %></p>
-          <p><b>Numéro d'indentité: </b><%= @invoice.specific_id %></p>
-          <p><b>Emplacement: </b><%= @invoice.emplacement %></p>
+
+
+
+
+
+
+
 
         </div>
 
-         <div class="box-container">
+
+                <div class="box-container">
+          <h3>Source :</h3>
+          <center>
+          <%= link_to "Facture","http://res.cloudinary.com/mathieuabeille/image/upload/#{@invoice.photo.path}",  class: 'btn btn-medium btn-lg' %><br/>
+          <%= link_to "http://res.cloudinary.com/mathieuabeille/image/upload/#{@invoice.photo.path}" do %>
+          <% if @invoice.photo? %>
+          <%= cl_image_tag @invoice.photo.path, as: :attachinary, style: "@media screen and (max-width: 640px) { width: 100px;
+}", crop: :fill %>
+          </center>
+          <% end %>
+          <% end %>
+
+
+          </center>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+
+          <div class="box-container">
+            <h3>Bilan financier :</h3>
+          <% if @invoice.value.present?  %>
+            <p><b>Prix achat: </b> <%= @invoice.value %>$</p>
+          <% end %>
+
+
+            <p><b>Valeur amortie: </b>
+            <% if @invoice.value.present? && ((@invoice.fin_amortissement.year-@invoice.date_achat.year)>0) %>
+              <%= ((Time.now.year-@invoice.date_achat.year)*(@invoice.value*(100/(@invoice.fin_amortissement.year-@invoice.date_achat.year)))/100) %> $
+            <% else %>
+              impossible
+            <% end %></p>
+             <p><b>Valeur residuelle: </b>
+            <% if @invoice.value.present? && ((@invoice.fin_amortissement.year-@invoice.date_achat.year)>0) %>
+              <%= @invoice.value-((Time.now.year-@invoice.date_achat.year)*(@invoice.value*(100/(@invoice.fin_amortissement.year-@invoice.date_achat.year)))/100) %> $
+            <% else %>
+              impossible
+            <% end %></p>
+
+            <p><b>Dépreciation annuelle:</b> </b>
+            <% if @invoice.value.present? && ((@invoice.fin_amortissement.year-@invoice.date_achat.year)>0) %>
+              <%= (@invoice.value*(100/(@invoice.fin_amortissement.year-@invoice.date_achat.year)))/100 %> $
+            <% else %>
+              impossible
+            <% end %></p>
+            <p><b>Durée amortisation:</b>
+            <% if @invoice.fin_amortissement.present?  %>
+            <%= @invoice.fin_amortissement.year-@invoice.date_achat.year%>ans</p>
+            <% end %>
+            <p><b>Temps écoulé:</b>
+            <% if @invoice.date_achat.present?  %>
+            <%= Time.now.year-@invoice.date_achat.year%> ans</p>
+            <% end %>
+            <p><b>Temps restant:</b>
+             <% if @invoice.fin_amortissement.present?  %>
+            <%= @invoice.fin_amortissement.year-Time.now.year%> ans</p>
+            <% end %>
+          <% if @invoice.date_achat.present?  %>
+            <p><b>Date d'achat: </b> <%= @invoice.date_achat %></p>
+          <% end %>
+            <% if @invoice.fin_amortissement.present?  %>
+            <p><b>Fin amortissement : </b> <%= @invoice.fin_amortissement %></p>
+          <% end %>
+
+
+      </div>
+
+<div class="box-container">
           <h3>Ajouter un commentaire : </h3>
           <%= simple_form_for [@invoice, @review] do |f| %>
           <%= f.input :auteur, label: 'Auteur:' %>
@@ -43,56 +150,4 @@
             </div>
           <% end %>
           </div>
-      <div class="col-sm-4">
-
-          <div class="box-container">
-            <h3>Amortissement :</h3>
-
-            <p><b>Valeur achat: </b>
-              <%= @invoice.value %>$
-              </p>
-
-            <p><b>Valeur amortie: </b>
-            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
-              <%= ((Time.now.year-@invoice.begin.year)*(@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100) %> $
-            <% else %>
-              impossible
-            <% end %></p>
-             <p><b>Valeur residuelle: </b>
-            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
-              <%= @invoice.value-((Time.now.year-@invoice.begin.year)*(@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100) %> $
-            <% else %>
-              impossible
-            <% end %></p>
-
-            <p><b>Dépreciation annuelle:</b> </b>
-            <% if @invoice.value.present? && ((@invoice.end.year-@invoice.begin.year)>0) %>
-              <%= (@invoice.value*(100/(@invoice.end.year-@invoice.begin.year)))/100 %> $
-            <% else %>
-              impossible
-            <% end %></p>
-            <p><b>Durée amortisation:</b>
-            <%= @invoice.end.year-@invoice.begin.year%>ans</p>
-            <p><b>Temps écoulé:</b>
-            <%= Time.now.year-@invoice.begin.year%> ans</p>
-            <p><b>Temps restant:</b>
-            <%= @invoice.end.year-Time.now.year%> ans</p>
-            <p><b>Début amortissement: </b>
-            <%= @invoice.begin %></p>
-            <p><b>Fin amortissement: </b>
-            <%= @invoice.end %></p>
-          </div>
-
-          <div class="box-container">
-          <h3>Source :</h3>
-          <center>
-          <% if @invoice.photo? %>
-          <%= cl_image_tag @invoice.photo.path, width: 200, height: 300, crop: :fill %>
-          <% end %>
-          </center>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
+          </div></div>

@@ -27,7 +27,7 @@
 .table-row{
   margin: 10px;
   padding: 5px;
-  height: 80px;
+  min-height: 40px;
   background-color: $light-gray;
   border-left: solid 5px $blue-aca;
 }
