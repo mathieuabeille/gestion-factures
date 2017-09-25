@@ -1,11 +1,28 @@
 <div class="logbox">
 <%= simple_form_for(@contrat) do |f| %>
   <%= f.error_notification %>
-
   <div class="form-inputs">
+  <h2>société</h2>
+    <%= f.input :societe, label: 'Nom de la société' %>
+    <%= f.input :nsiret, label: 'Numéro de siret' %>
+    <%= f.input :cnaf, label: 'Numéro CNAF'%>
+    <%= f.input :sadresse, label: 'Adresse Société' %>
+    <%= f.input :scposte, label: 'Code postal' %>
+    <%= f.input :sville, label: 'Ville' %>
+    <%= f.input :typesociete,  collection: [ "SARL", "Société en nom propre", "EURL", "SAS", "SA"], label: "Type de société" %>
+    <%= f.input :sexerepresentant, collection: [ "Masculin", "Féminin"] , label: "Sexe du représentant" %>
+    <%= f.input :nomrepresentant, label: 'Nom du représentant (ne pas remplir si entreprise en nom propre)' %>
+    <%= f.input :prenomrepresentant, label: 'Prénom du représentant (ne pas remplir si entreprise en nom propre)' %>
+    <%= f.input :posterepresentant, label: 'Fonction du représentant (ne pas remplir si entreprise en nom propre)' %>
+    <%= f.input :numeroaffiliation, label: 'Numéro affiliation URSSAF' %>
+    <%= f.input :regionurssaf, label: "Région de l'URSSAF" %>
+    <%= f.input :adresseurssaf, label: "Adresse de l'URSSAF" %>
+
+  <h2>Employé</h2>
     <%= f.input :nom %>
     <%= f.input :prenom %>
     <%= f.input :adresse %>
+    <%= f.input :startdate %>
   </div>
 
   <div class="form-actions">

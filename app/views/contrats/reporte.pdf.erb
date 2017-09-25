@@ -1,9 +1,99 @@
 
-<p>Monsieur
- <b> <%= @contrat.nom %>
-  <%= @contrat.prenom %></b>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <%= wicked_pdf_stylesheet_link_tag  'contrats' %>
 
- residant au
-  <b><%= @contrat.adresse %></b>
-</p>
+</head>
+<body>
 
+
+<div class="head">
+    <h1>Contrat de travail à durée déterminée d’usage
+    extra de la restauration</h1>
+    <% if @contrat.startdate.present? %>
+    à effet du <b><%= @contrat.startdate.strftime('%d/%m/%Y')
+   %></b>
+    <% end %>
+  </div>
+<br/>
+  <div class="bar">
+    <b>Entre les soussignés </b>
+  </div>
+
+  <div class="societe">
+    <% if @contrat.societe.present? %>
+    <h4><%= @contrat.societe %></h4>
+    <% end %>
+    <p>
+      <% if @contrat.typesociete.present? %>
+      <%= @contrat.typesociete %>
+      <% end %>
+      <% if @contrat.nsiret.present? %>
+      immatriculée sous le numéro SIRET <%= @contrat.nsiret %>
+      <% end %><br/>
+    <% if @contrat.cnaf.present? %>
+    Code NAF: <%= @contrat.cnaf %>
+    <% end %><br/>
+    <% if @contrat.sadresse.present? %>
+    Dont le siège social est situé : <%= @contrat.sadresse %>
+    <% end %>
+    <% if @contrat.scposte.present? %>
+    <%= @contrat.scposte %>
+    <% end %>
+
+    <% if @contrat.sville.present? %>
+    <%= @contrat.sville %>
+    <% end %>
+
+    <% if @contrat.typesociete == "Société en nom propre" && @contrat.typesociete.present? %>
+<!--     Rien afficher -->
+    <% else %>
+    <br/>Agissant par l'intermédiaire de son représentant légal :
+      <% if @contrat.sexerepresentant == "Masculin" && @contrat.sexerepresentant.present? %>
+         Monsieur
+      <% else %>
+      Madame/Mademoiselle
+      <% end %>
+      <% if @contrat.nomrepresentant.present? %>
+      <b><%= @contrat.nomrepresentant.upcase %>
+      <% end %>
+      <% if @contrat.prenomrepresentant.present? %>
+      <%= @contrat.prenomrepresentant %></b>,
+      <% end %>
+
+
+
+      <% if @contrat.posterepresentant.present? %>
+      <i><%= @contrat.posterepresentant %></i>
+      <% end %>
+    <% end %>
+Dont les cotisations de sécurité sociale sont versées sous le numéro :
+      <b><% if @contrat.numeroaffiliation.present? %>
+    <%= @contrat.numeroaffiliation %> </b>à l'URSSAF
+      <% end %>
+      <b><% if @contrat.regionurssaf.present? %>
+      <%= @contrat.regionurssaf %></b>
+      <% end %>
+      située à
+      <b><% if @contrat.adresseurssaf.present? %>
+      <%= @contrat.adresseurssaf %></b>
+      <% end %></p>
+      <p>Ci-après désigné l’employeur.</p>
+      <p> <div class="partie"><b>D'une part,</b></div> </p><br/>
+</div>
+
+  <div class="bar">
+    <b>Et </b>
+  </div>
+
+
+
+
+
+
+
+
+</body>
+</html>
