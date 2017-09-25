@@ -6,9 +6,7 @@
     <%= f.input :societe, label: 'Nom de la société' %>
     <%= f.input :nsiret, label: 'Numéro de siret' %>
     <%= f.input :cnaf, label: 'Numéro CNAF'%>
-    <%= f.input :sadresse, label: 'Adresse Société' %>
-    <%= f.input :scposte, label: 'Code postal' %>
-    <%= f.input :sville, label: 'Ville' %>
+    <%= f.input :sadresse, label: 'Adresse complète de la société' %>
     <%= f.input :typesociete,  collection: [ "SARL", "Société en nom propre", "EURL", "SAS", "SA"], label: "Type de société" %>
     <%= f.input :sexerepresentant, collection: [ "Masculin", "Féminin"] , label: "Sexe du représentant" %>
     <%= f.input :nomrepresentant, label: 'Nom du représentant (ne pas remplir si entreprise en nom propre)' %>
@@ -16,13 +14,29 @@
     <%= f.input :posterepresentant, label: 'Fonction du représentant (ne pas remplir si entreprise en nom propre)' %>
     <%= f.input :numeroaffiliation, label: 'Numéro affiliation URSSAF' %>
     <%= f.input :regionurssaf, label: "Région de l'URSSAF" %>
-    <%= f.input :adresseurssaf, label: "Adresse de l'URSSAF" %>
+    <%= f.input :adresseurssaf, label: "Adresse complète de l'URSSAF" %>
 
   <h2>Employé</h2>
-    <%= f.input :nom %>
-    <%= f.input :prenom %>
-    <%= f.input :adresse %>
-    <%= f.input :startdate %>
+    <%= f.input :empcivilite, collection: [ "Madame", "Mademoiselle", "Monsieur"] , label: "Civilité" %>
+    <%= f.input :nom, label: "Nom de l'employé" %>
+    <%= f.input :prenom, label: "Prénom de l'employé" %>
+    <%= f.input :nsecu, label: "Numéro de sécurité sociale" %>
+
+    <%= f.input :birthdate, as: :date, label: "Date de naissance", start_year: Date.today.year - 90,
+                              end_year: Date.today.year - 16%>
+    <%= f.input :birthplace, label: "Lieu de naissance" %>
+    <%= f.input :nationalite, label: "Nationalité de naissance" %>
+    <%= f.input :adresse, label: "Adresse complète de l'employé" %>
+    <%= f.input :startdate, label: "Début du contrat de travail" %>
+
+  </div>
+
+<h2>Remplir si travailleur de nationalité hors UE</h2>
+    <%= f.input :permissejournum, label: "Numéro de permis de séjour" %>
+    <%= f.input :permissejourdate, label: "Début du permis de séjour" %>
+    <%= f.input :permissejourexp, label: "Expiration du permis de séjour" %>
+    <%= f.input :permissejourloc, label: "Préfecture qui a délivré le permis de séjour" %>
+
   </div>
 
   <div class="form-actions">

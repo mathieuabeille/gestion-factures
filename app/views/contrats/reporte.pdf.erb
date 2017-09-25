@@ -39,13 +39,6 @@
     <% if @contrat.sadresse.present? %>
     Dont le siège social est situé : <%= @contrat.sadresse %>
     <% end %>
-    <% if @contrat.scposte.present? %>
-    <%= @contrat.scposte %>
-    <% end %>
-
-    <% if @contrat.sville.present? %>
-    <%= @contrat.sville %>
-    <% end %>
 
     <% if @contrat.typesociete == "Société en nom propre" && @contrat.typesociete.present? %>
 <!--     Rien afficher -->
@@ -87,6 +80,116 @@ Dont les cotisations de sécurité sociale sont versées sous le numéro :
   <div class="bar">
     <b>Et </b>
   </div>
+
+  <div class="societe">
+    <h4>
+    <% if @contrat.empcivilite.present? %>
+    <%= @contrat.empcivilite %>
+    <% end %> <% if @contrat.nom.present? %>
+    <%= @contrat.nom.capitalize %> <% end %><% if @contrat.prenom.present? %>
+    <%= @contrat.prenom %>
+    <% end %> </h4>
+    <p>
+
+<% if @contrat.empcivilite.present? && @contrat.empcivilite == "Monsieur" %>
+Né le :
+<% else %>
+Née le :
+<% end %>
+
+
+
+
+    <% if @contrat.birthdate.present? %>
+    <%= @contrat.birthdate.strftime('%d/%m/%Y') %> à <% if @contrat.birthplace.present? %>
+    <%= @contrat.birthplace %><% end %>
+    <br/>Demeurant : <% if @contrat.adresse.present? %>
+    <%= @contrat.adresse %><% end %>
+    <br/>Nationalité : <% if @contrat.nationalite.present? %>
+    <%= @contrat.nationalite %> <% end %>
+    <br/>Numéro de sécurité social : <% if @contrat.nsecu.present? %>
+    <%= @contrat.nsecu %><% end %>
+    <br/><% if @contrat.permissejournum.present? %> Titulaire
+    permis de séjour du N° <%= @contrat.permissejournum %> délivré(e) le <%= @contrat.permissejourdate.strftime('%d/%m/%Y') %>  par la Préfecture <%= @contrat.permissejourloc %>, valable jusqu’au <%= @contrat.permissejourexp.strftime('%d/%m/%Y') %>
+    <% else %>
+    <% end %>
+    <% end %>
+     </p>
+    <p>Ci-après
+    <!-- logique du sexe -->
+<% if @contrat.empcivilite.present? && @contrat.empcivilite == "Monsieur" %>
+désigné le salarié.
+<% else %>
+désignée la salariée.
+<% end %>
+
+
+    </p>
+    <p> <div class="partie"><b>D'autre part,</b></div> </p><br/>
+  </div>
+
+  <div class="bar">
+    <b>Il a été convenu ce qui suit :
+ </b>
+  </div>
+
+<div class="societe">
+  <u><h4>ARTICLE 1: NATURE DU CONTRAT</h4></u>
+  <p>
+   L’employeur engage <%= @contrat.empcivilite %> <%= @contrat.nom.capitalize %> <%= @contrat.prenom %>, en application des articles D. 1242-1,  L. 1242-1 et L. 1242-2 3° du Code du Travail, ainsi que par l’article 14 de la Convention collective nationale des Hôtels, Cafés Restaurant (HCR), par un contrat à durée déterminée d’usage, sous réserve de des résultats de la visite médicale d'information et de prévention (sauf si celle-ci n’est pas requise du fait de l’existence des conditions prescrites à l’article R.4624-15 du Code du travail).
+  </p>
+  <p>La visite d’information et de prévention devra être réalisée dans un délai qui n'excède pas trois mois à compter de la prise effective du poste de travail.
+</p>
+<p>
+  Si la visite n’est pas réalisée par le médecin du travail, le salarié s’engage à informer le professionnel de santé, au cours de cette visite, de son statut de travailleur handicapé, ou du fait qu’il est titulaire d’une pension invalidité, afin d’être orienté sans délai vers le médecin du travail.
+</p>
+<p>Le travail qui sera accompli, est effectué dans le secteur de la restauration, activité de l’employeur, dans lequel il est d’usage constant de ne pas recourir à un contrat à durée indéterminée pour exécuter un travail par nature temporaire.
+</p><br/>
+<u><h4>ARTICLE 2: L’ENGAGEMENT
+</h4></u>
+<p>
+Le présent contrat est conclu pour pourvoir de manière temporaire, en qualité d’extra, l’emploi suivant : <b>TITRE</b> classé de la manière suivante : Statut : Employé - Niveau: I  Echelon: 1.
+</p>
+<p>La déclaration nominative préalable à l'embauche a été remise à l'Urssaf <%= @contrat.regionurssaf %></p>
+<p>
+  Conformément à la loi du 6 janvier 1978, <b><%= @contrat.empcivilite %> <%= @contrat.nom.capitalize %> <%= @contrat.prenom %></b> a un droit d’accès et de rectification aux informations portées sur ce document.
+
+</p><br/>
+<u><h4>ARTICLE 3 : DUREE DU CONTRAT
+
+</h4></u>
+
+<p>
+L’employeur embauche <b><%= @contrat.empcivilite %> <%= @contrat.nom.capitalize %> <%= @contrat.prenom %></b> à compter du <b><%= @contrat.startdate %></b>, en qualité de <b>TITRE</b> pour une période de <b>DURÉE</b>. La présence du salarié est fixée en fonction des nécessités du service, conformément aux dispositions en vigueur. En tout état de cause, le salarié devra indiquer les heures de travail qu’il a accomplies sur un cahier d’émargement.</p>
+
+<p>Le présent contrat prendra automatiquement fin à l’échéance du terme prévu, soit le <b>DATE FIN</b>
+
+</p>
+
+
+<br/>
+<u><h4>ARTICLE 4 : LA PERIODE D’ESSAI
+
+
+</h4></u>
+<p>Il est convenu que <b><%= @contrat.empcivilite %> <%= @contrat.nom.capitalize %> <%= @contrat.prenom %></b>  effectuera une période d’essai de <b>DUREEPERIODEESSAI</b>.  (article L. 1242-10 du Code du Travail) qui expirera au plus tard le <b>EXPIRATIONPERIODEESSAI</b>à minuit</p>
+<p>Il est précisé que la période d’essai s’entend d’une période de travail effectif. Toute suspension de l’exécution du contrat, quel qu’en soit le motif, entraînera une prolongation de la période d’essai d’une durée équivalente à celle de la suspension.
+</p>
+<p>Au cours de cette période, le contrat pourra être rompu par l'une ou l'autre des parties, à tout moment, sous réserve du délai de prévenance prévu aux articles L. 1221-25 et L. 1221-26 du Code du travail, soit :
+</p>
+<p>-  pour  <b><%= @contrat.empcivilite %> <%= @contrat.nom.capitalize %> <%= @contrat.prenom %></b>  : de 24 heures en deçà de 8 jours de présence et 48 heures au-delà.
+- pour l'employeur :
+<li>de 24 heures en deçà de 8 jours de présence,</li>
+<li>48 heures entre 8 jours et 1 mois,</li>
+<li>2 semaines après 1 mois,</li>
+<li>1 mois après 3 mois de présence.</li>
+
+
+
+</p>
+<p></p>
+<p></p>
+</div>
 
 
 
